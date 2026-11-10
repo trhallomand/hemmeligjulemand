@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="is">
+<html lang="da">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dulni jólasveinninn</title>
+    <title>Den Hemmelige Nisse</title>
     <style>
       * { box-sizing: border-box; margin: 0; padding: 0; }
       :root {
@@ -172,32 +172,32 @@
 
     <header id="header">
       <div class="tree">🎄</div>
-      <h1>Dulni jólasveinninn</h1>
-      <p>Hó hó hó! Finndu út hver þú átt að gleðja þessi jólin.</p>
+      <h1>Den Hemmelige Nisse</h1>
+      <p>Hø ho hø! Find ud af, hvem du skal forkæle i år.</p>
     </header>
 
     <!-- Pick view -->
     <div id="pick-view" style="display:flex;flex-direction:column;align-items:center;position:relative;z-index:1;">
-      <p class="question">Hver ert þú?</p>
+      <p class="question">Hvem er du?</p>
       <div class="grid" id="name-grid"></div>
       <div class="card hidden" id="all-drawn">
-        <h2>Allir á þessu tæki hafa dregið! 🎁</h2>
-        <p class="sub">Munaðir ekki hverja þú fékkst? Skoðaðu hér fyrir neðan.</p>
+        <h2>Alle på denne enhed har trukket! 🎁</h2>
+        <p class="sub">Kan du ikke huske, hvem du fik? Se herunder.</p>
       </div>
-      <button class="link-btn" id="toggle-lookup">Hefur þú nú þegar dregið? Sjáðu hverja þú fékkst</button>
+      <button class="link-btn" id="toggle-lookup">Har du allerede trukket? Se hvem du fik</button>
     </div>
 
     <!-- Reveal view -->
     <div id="reveal-view" class="hidden" style="display:flex;flex-direction:column;align-items:center;position:relative;z-index:1;">
       <p class="question" id="reveal-question"></p>
-      <button class="gift" id="gift" aria-label="Opna gjöfina">🎁</button>
+      <button class="gift" id="gift" aria-label="Åbn gaven">🎁</button>
       <div class="reveal hidden" id="reveal-card">
-        <div class="label">Gjöfin þín fer til</div>
+        <div class="label">Din gave går til</div>
         <div class="person" id="person"></div>
         <div class="party">🎉🎅✨</div>
       </div>
-      <p class="hint hidden" id="hint">Haltu þessu leyndu! 🤫 Taktu skjáskot ef þú þarft að muna eftir þessu.</p>
-      <button class="link-btn" id="done-btn">Búið</button>
+      <p class="hint hidden" id="hint">Hold det hemmeligt! 🤫 Tag et screenshot, hvis du skal huske det.</p>
+      <button class="link-btn" id="done-btn">Færdig</button>
     </div>
 
     <script>
@@ -270,7 +270,6 @@
       var person = document.getElementById("person");
       var hint = document.getElementById("hint");
       var doneBtn = document.getElementById("done-btn");
-      var header = document.getElementById("header");
 
       function renderGrid() {
         var drawn = getDrawn();
@@ -294,7 +293,7 @@
       function choose(name) {
         if (!lookupMode) markDrawn(name);
         revealQuestion.textContent =
-          "Góðan daginn " + name + "! Þú átt að gefa gjöf til...";
+          "Hej " + name + "! Du skal give en gave til...";
         person.textContent = assignments[name] || "?";
         gift.classList.remove("hidden");
         revealCard.classList.add("hidden");
@@ -306,7 +305,7 @@
 
       function reset() {
         lookupMode = false;
-        toggleLookup.textContent = "Hefur þú nú þegar dregið? Sjáðu hverja þú fékkst";
+        toggleLookup.textContent = "Har du allerede trukket? Se hvem du fik";
         revealView.classList.add("hidden");
         pickView.classList.remove("hidden");
         renderGrid();
@@ -323,8 +322,8 @@
       toggleLookup.addEventListener("click", function () {
         lookupMode = !lookupMode;
         toggleLookup.textContent = lookupMode
-          ? "Til baka í uppdraftinn"
-          : "Hefur þú nú þegar dregið? Sjáðu hverja þú fékkst";
+          ? "Tilbage til trækningen"
+          : "Har du allerede trukket? Se hvem du fik";
         renderGrid();
       });
 
