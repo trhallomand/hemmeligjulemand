@@ -6,162 +6,34 @@
     <title>Den Hemmelige Nisse</title>
     <style>
       * { box-sizing: border-box; margin: 0; padding: 0; }
-      :root {
-        font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-        color: #fff;
-      }
-      body {
-        min-height: 100vh;
-        background: linear-gradient(to bottom, #991b1b, #b91c1c, #14532d);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 40px 16px;
-        overflow-x: hidden;
-        position: relative;
-      }
-      .snow {
-        position: fixed;
-        inset: 0;
-        pointer-events: none;
-        overflow: hidden;
-      }
-      .flake {
-        position: absolute;
-        top: -40px;
-        color: #fff;
-        user-select: none;
-        animation: fall linear infinite;
-      }
-      @keyframes fall {
-        from { transform: translateY(-5vh) rotate(0deg); }
-        to { transform: translateY(110vh) rotate(360deg); }
-      }
+      :root { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: #fff; }
+      body { min-height: 100vh; background: linear-gradient(to bottom, #991b1b, #b91c1c, #14532d); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 16px; overflow-x: hidden; position: relative; }
+      .snow { position: fixed; inset: 0; pointer-events: none; overflow: hidden; }
+      .flake { position: absolute; top: -40px; color: #fff; user-select: none; animation: fall linear infinite; }
+      @keyframes fall { from { transform: translateY(-5vh) rotate(0deg); } to { transform: translateY(110vh) rotate(360deg); } }
       header { text-align: center; margin-bottom: 32px; position: relative; z-index: 1; }
       header .tree { font-size: 48px; }
-      header h1 {
-        margin-top: 8px;
-        font-size: clamp(28px, 6vw, 38px);
-        font-weight: 800;
-        letter-spacing: -0.02em;
-        text-shadow: 0 2px 8px rgba(0,0,0,0.3);
-      }
+      header h1 { margin-top: 8px; font-size: clamp(28px, 6vw, 38px); font-weight: 800; letter-spacing: -0.02em; text-shadow: 0 2px 8px rgba(0,0,0,0.3); }
       header p { margin-top: 8px; color: rgba(255,255,255,0.85); font-size: 17px; }
-      .grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-        width: 100%;
-        max-width: 420px;
-        position: relative;
-        z-index: 1;
-      }
-      .name-btn {
-        border: 1px solid rgba(252,165,165,0.4);
-        background: rgba(255,255,255,0.95);
-        color: #991b1b;
-        font-size: 18px;
-        font-weight: 600;
-        padding: 20px 16px;
-        border-radius: 16px;
-        cursor: pointer;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.25);
-        transition: transform 0.15s ease, background 0.15s ease;
-        animation: pop 0.4s ease both;
-      }
+      .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; width: 100%; max-width: 420px; position: relative; z-index: 1; }
+      .name-btn { border: 1px solid rgba(252,165,165,0.4); background: rgba(255,255,255,0.95); color: #991b1b; font-size: 18px; font-weight: 600; padding: 20px 16px; border-radius: 16px; cursor: pointer; box-shadow: 0 10px 25px rgba(0,0,0,0.25); transition: transform 0.15s ease, background 0.15s ease; animation: pop 0.4s ease both; }
       .name-btn:hover { background: #fef2f2; transform: scale(1.04); }
       .name-btn:active { transform: scale(0.96); }
-      @keyframes pop {
-        from { opacity: 0; transform: translateY(16px); }
-        to { opacity: 1; transform: translateY(0); }
-      }
-      .link-btn {
-        margin-top: 20px;
-        background: none;
-        border: none;
-        color: rgba(255,255,255,0.8);
-        font-size: 14px;
-        text-decoration: underline;
-        text-underline-offset: 4px;
-        cursor: pointer;
-        position: relative;
-        z-index: 1;
-      }
+      @keyframes pop { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+      .link-btn { margin-top: 20px; background: none; border: none; color: rgba(255,255,255,0.8); font-size: 14px; text-decoration: underline; text-underline-offset: 4px; cursor: pointer; position: relative; z-index: 1; }
       .link-btn:hover { color: #fff; }
       .question { font-size: 19px; font-weight: 600; margin-bottom: 20px; z-index: 1; position: relative; }
-      .card {
-        background: rgba(255,255,255,0.95);
-        color: #991b1b;
-        border-radius: 16px;
-        padding: 24px;
-        text-align: center;
-        max-width: 380px;
-        box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        position: relative;
-        z-index: 1;
-      }
+      .card { background: rgba(255,255,255,0.95); color: #991b1b; border-radius: 16px; padding: 24px; text-align: center; max-width: 380px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); position: relative; z-index: 1; }
       .card h2 { font-size: 18px; }
       .card .sub { font-size: 14px; color: rgba(153,27,27,0.8); margin-top: 4px; }
-      .gift {
-        font-size: 72px;
-        background: rgba(255,255,255,0.1);
-        border: none;
-        border-radius: 24px;
-        padding: 32px 40px;
-        cursor: pointer;
-        box-shadow: 0 25px 50px rgba(0,0,0,0.35);
-        backdrop-filter: blur(4px);
-        animation: wiggle 1.6s ease-in-out infinite;
-        z-index: 1;
-        position: relative;
-      }
-      @keyframes wiggle {
-        0%, 100% { transform: rotate(0deg); }
-        20% { transform: rotate(-4deg); }
-        40% { transform: rotate(4deg); }
-        60% { transform: rotate(-3deg); }
-        80% { transform: rotate(3deg); }
-      }
-      .reveal {
-        background: #fff;
-        border: 4px solid #fde047;
-        border-radius: 24px;
-        padding: 32px 32px;
-        text-align: center;
-        box-shadow: 0 25px 50px rgba(0,0,0,0.35);
-        animation: springIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
-        position: relative;
-        z-index: 1;
-      }
-      @keyframes springIn {
-        from { transform: scale(0.4) rotate(-10deg); opacity: 0; }
-        to { transform: scale(1) rotate(0deg); opacity: 1; }
-      }
-      .reveal .label {
-        font-size: 13px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.12em;
-        color: #b91c1c;
-      }
-      .reveal .person {
-        margin-top: 8px;
-        font-size: 36px;
-        font-weight: 800;
-        color: #166534;
-      }
+      .gift { font-size: 72px; background: rgba(255,255,255,0.1); border: none; border-radius: 24px; padding: 32px 40px; cursor: pointer; box-shadow: 0 25px 50px rgba(0,0,0,0.35); backdrop-filter: blur(4px); animation: wiggle 1.6s ease-in-out infinite; z-index: 1; position: relative; }
+      @keyframes wiggle { 0%, 100% { transform: rotate(0deg); } 20% { transform: rotate(-4deg); } 40% { transform: rotate(4deg); } 60% { transform: rotate(-3deg); } 80% { transform: rotate(3deg); } }
+      .reveal { background: #fff; border: 4px solid #fde047; border-radius: 24px; padding: 32px 32px; text-align: center; box-shadow: 0 25px 50px rgba(0,0,0,0.35); animation: springIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both; position: relative; z-index: 1; }
+      @keyframes springIn { from { transform: scale(0.4) rotate(-10deg); opacity: 0; } to { transform: scale(1) rotate(0deg); opacity: 1; } }
+      .reveal .label { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #b91c1c; }
+      .reveal .person { margin-top: 8px; font-size: 36px; font-weight: 800; color: #166534; }
       .reveal .party { margin-top: 12px; font-size: 24px; }
-      .hint {
-        margin-top: 24px;
-        max-width: 300px;
-        text-align: center;
-        font-size: 14px;
-        color: rgba(255,255,255,0.85);
-        animation: fade 0.5s ease 0.4s both;
-        position: relative;
-        z-index: 1;
-      }
+      .hint { margin-top: 24px; max-width: 300px; text-align: center; font-size: 14px; color: rgba(255,255,255,0.85); animation: fade 0.5s ease 0.4s both; position: relative; z-index: 1; }
       @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
       .fade-in { animation: fade 0.4s ease both; }
       .hidden { display: none !important; }
@@ -169,14 +41,11 @@
   </head>
   <body>
     <div class="snow" id="snow"></div>
-
     <header id="header">
       <div class="tree">🎄</div>
       <h1>Den Hemmelige Nisse</h1>
-      <p>Ho ho ho! Find ud af, hvem du skal give gave til i år.</p>
+      <p>Hø ho hø! Find ud af, hvem du skal forkæle i år.</p>
     </header>
-
-    <!-- Pick view -->
     <div id="pick-view" style="display:flex;flex-direction:column;align-items:center;position:relative;z-index:1;">
       <p class="question">Hvem er du?</p>
       <div class="grid" id="name-grid"></div>
@@ -186,8 +55,6 @@
       </div>
       <button class="link-btn" id="toggle-lookup">Har du allerede trukket? Se hvem du fik</button>
     </div>
-
-    <!-- Reveal view -->
     <div id="reveal-view" class="hidden" style="display:flex;flex-direction:column;align-items:center;position:relative;z-index:1;">
       <p class="question" id="reveal-question"></p>
       <button class="gift" id="gift" aria-label="Åbn gaven">🎁</button>
@@ -199,48 +66,25 @@
       <p class="hint hidden" id="hint">Hold det hemmeligt! 🤫 Tag et screenshot, hvis du skal huske det.</p>
       <button class="link-btn" id="done-btn">Færdig</button>
     </div>
-
     <script>
-      /* ============================================================
-         CONFIG - the names and the pre-drawn assignments.
-         ============================================================ */
-      var SISTERS = ["Fjóla", "Magnea", "Anna", "Huldis", "Linda", "Freya"];
-
-      // Obfuscated pre-drawn assignments (nobody draws themselves)
-      var SECRET_KEY = "yaa9xE3s4QpWnjc5";
+      var SISTERS = ["Fjóla","Magnea","Anna","Huldis","Linda","Freja"];
+      var SECRET_KEY = "TQiAKRcr3259wzFo";
       var PAYLOAD =
-        "0002004300270053008b002900520051000e0073003100390000000b00410019005b002c0000005e0016002000520051000e0073003c003e0000000e000200170055004300200057001600240011004900160017001a00a40002000b00410019005b002900140055001c002c00400051000e0073003d00360009000400060054005b004d004300750011002b005700120016006b00520011001c000f001a0054005b004d0043007f000a0020004a00120016006b0052001f001b00060007005c000a0043001c";
-
+        "002f0073002f002b00b8003e0002005000090010007900500019001e0027004d0078007300240020002c003c00060013001100080017007f001d0089002a000e0076007d004b00000025003c00020050000900100073004b001200100027004d007800730021003400270036000a000100110008001700740016001d0028000a00350073004500630007003b000d001600520010000f001b003f000f002a000b003d0022004b006d006900140011001700590053001700030055003b00280001003500730014";
       function decodeAssignments() {
         var json = "";
         for (var i = 0; i < PAYLOAD.length; i += 4) {
           var x = parseInt(PAYLOAD.slice(i, i + 4), 16);
-          json += String.fromCharCode(
-            x ^ SECRET_KEY.charCodeAt((i / 4) % SECRET_KEY.length)
-          );
+          json += String.fromCharCode(x ^ SECRET_KEY.charCodeAt((i / 4) % SECRET_KEY.length));
         }
         return JSON.parse(json);
       }
-
       var STORAGE_KEY = "santa-drawn-v1";
-
-      function getDrawn() {
-        try {
-          return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-        } catch (e) {
-          return [];
-        }
-      }
-
+      function getDrawn() { try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"); } catch (e) { return []; } }
       function markDrawn(name) {
         var drawn = getDrawn();
-        if (drawn.indexOf(name) === -1) {
-          drawn.push(name);
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(drawn));
-        }
+        if (drawn.indexOf(name) === -1) { drawn.push(name); localStorage.setItem(STORAGE_KEY, JSON.stringify(drawn)); }
       }
-
-      /* ---------- Snow ---------- */
       (function makeSnow() {
         var snow = document.getElementById("snow");
         for (var i = 0; i < 28; i++) {
@@ -255,10 +99,8 @@
           snow.appendChild(f);
         }
       })();
-
       var assignments = decodeAssignments();
       var lookupMode = false;
-
       var pickView = document.getElementById("pick-view");
       var revealView = document.getElementById("reveal-view");
       var nameGrid = document.getElementById("name-grid");
@@ -270,12 +112,9 @@
       var person = document.getElementById("person");
       var hint = document.getElementById("hint");
       var doneBtn = document.getElementById("done-btn");
-
       function renderGrid() {
         var drawn = getDrawn();
-        var available = lookupMode
-          ? SISTERS
-          : SISTERS.filter(function (s) { return drawn.indexOf(s) === -1; });
+        var available = lookupMode ? SISTERS : SISTERS.filter(function (s) { return drawn.indexOf(s) === -1; });
         nameGrid.innerHTML = "";
         allDrawn.classList.toggle("hidden", available.length > 0);
         available.forEach(function (name, i) {
@@ -283,17 +122,13 @@
           btn.className = "name-btn";
           btn.textContent = name;
           btn.style.animationDelay = i * 0.06 + "s";
-          btn.addEventListener("click", function () {
-            choose(name);
-          });
+          btn.addEventListener("click", function () { choose(name); });
           nameGrid.appendChild(btn);
         });
       }
-
       function choose(name) {
         if (!lookupMode) markDrawn(name);
-        revealQuestion.textContent =
-          "Hej " + name + "! Du skal give en gave til...";
+        revealQuestion.textContent = "Hej " + name + "! Du skal give en gave til...";
         person.textContent = assignments[name] || "?";
         gift.classList.remove("hidden");
         revealCard.classList.add("hidden");
@@ -302,7 +137,6 @@
         revealView.classList.remove("hidden");
         revealView.classList.add("fade-in");
       }
-
       function reset() {
         lookupMode = false;
         toggleLookup.textContent = "Har du allerede trukket? Se hvem du fik";
@@ -310,23 +144,17 @@
         pickView.classList.remove("hidden");
         renderGrid();
       }
-
       gift.addEventListener("click", function () {
         gift.classList.add("hidden");
         revealCard.classList.remove("hidden");
         hint.classList.remove("hidden");
       });
-
       doneBtn.addEventListener("click", reset);
-
       toggleLookup.addEventListener("click", function () {
         lookupMode = !lookupMode;
-        toggleLookup.textContent = lookupMode
-          ? "Tilbage til trækningen"
-          : "Har du allerede trukket? Se hvem du fik";
+        toggleLookup.textContent = lookupMode ? "Tilbage til trækningen" : "Har du allerede trukket? Se hvem du fik";
         renderGrid();
       });
-
       renderGrid();
     </script>
   </body>
